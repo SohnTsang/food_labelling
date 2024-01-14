@@ -1,0 +1,29 @@
+{% load i18n %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% trans "Create Label Template" %}</title>
+    <!-- Include your CSS files here -->
+</head>
+<body>
+    <h2>{% trans "Create Label Template" %}</h2>
+   <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">{% trans "Convert" %}</button>
+    </form>
+
+    <br>
+
+    <form action="{% url 'set_language' %}" method="post">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="{{ request.path }}">
+        <select name="language" onchange="this.form.submit()">
+            <option value="en"{% if LANGUAGE_CODE == "en" %} selected{% endif %}>English</option>
+            <option value="ja"{% if LANGUAGE_CODE == "ja" %} selected{% endif %}>日本語</option>
+            <!-- Add more language options as needed -->
+        </select>
+    </form>
+</body>
+</html>

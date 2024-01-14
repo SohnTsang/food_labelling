@@ -23,12 +23,17 @@ def create_label_template(request):
 
             label_sizes_names = [f'{size.size_name} ({size.dimensions})' for size in label_template.sizes.all()]
 
-            selected_country = label_template.country
-            country_code = selected_country.code
-            country_code = country_code.lower()
+            country_to_language = {
+                'sg': 'en',  # Singapore to English
+                # Add more mappings as needed
+            }
+
+            selected_country_code = label_template.country.code
+            converted_country_code = country_language_code = country_to_language.get(selected_country_code.lower(), 'en')
+
             # Process and translate data
-            translated_ingredients = translate_text(label_template.ingredients, country_code)  # Assuming English translation
-            translated_nutrients = translate_text(label_template.nutrients, country_code)
+            translated_ingredients = translate_text(label_template.ingredients, converted_country_code)  # Assuming English translation
+            translated_nutrients = translate_text(label_template.nutrients, converted_country_code)
 
             label_data = {
                 'label': {

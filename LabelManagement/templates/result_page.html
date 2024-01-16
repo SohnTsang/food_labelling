@@ -12,6 +12,17 @@
     <p>Other_info: {{ label.other_info }}</p>
     <p>Country: {{ label.country }}</p>
     <p>Label Sizes: {{ label.label_sizes }}</p>
+    <p>Content: {{ label.content }}</p>
+    <p>Expiry Date: {{ label.expiry_date }}</p>
+    <p>Instruction: {{ label.instruction }}</p>
+    <p>Company Name: {{ label.company_name }}</p>
+    <p>Company Address: {{ label.company_address }}</p>
+    <h4>Nutrients</h4>
+        <ul>
+            {% for nutrient in label.nutrients %}
+            <li>{{ nutrient.name }}: {{ nutrient.amount }}</li>
+            {% endfor %}
+        </ul>
     <!-- Add more fields as needed -->
 </body>
 </html>

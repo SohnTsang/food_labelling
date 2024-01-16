@@ -4,17 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f242610-e9f1-4ca4-bb7e-96999c18a57a" name="Changes" comment="adding project py files">
-      <change afterPath="$PROJECT_DIR$/utils/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/middleware.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/views.py" afterDir="false" />
+    <list default="true" id="0f242610-e9f1-4ca4-bb7e-96999c18a57a" name="Changes" comment="created utils app for all the functions needed across apps&#10;created middleware.py setting default language as 'en' for admin page&#10;updated files and tested default language across pages excep for admin as 'ja'">
+      <change afterPath="$PROJECT_DIR$/LabelManagement/migrations/0002_nutrient_labeltemplate_company_address_and_more.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LabelManagement/migrations/0003_alter_nutrient_amount.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LabelManagement/migrations/0004_remove_labeltemplate_nutrients_and_more.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LabelManagement/migrations/0005_alter_labeltemplate_content_and_more.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LabelManagement/migrations/0006_remove_labeltemplate_nutrients_and_more.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/food_label_project/static/LabelManagement/css/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CustomTranslation/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomTranslation/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabelManagement/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/LabelManagement/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabelManagement/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/LabelManagement/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabelManagement/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/LabelManagement/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabelManagement/templates/label_template_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/LabelManagement/templates/label_template_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabelManagement/templates/result_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/LabelManagement/templates/result_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabelManagement/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/LabelManagement/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/food_label_project/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/food_label_project/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/middleware.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/middleware.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +37,7 @@
   </component>
   <component name="Git.Settings">
     <option name="PUSH_AUTO_UPDATE" value="true" />
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/food_label_project" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -65,11 +71,11 @@
       <recent name="C:\Users\Admin\Desktop\Label\project\Food_Labelling\food_label_project\credentials" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Admin\Desktop\Label\project\Food_Labelling\food_label_project\static\LabelManagement\css" />
       <recent name="C:\Users\Admin\Desktop\Label\project\Food_Labelling\food_label_project" />
       <recent name="C:\Users\Admin\Desktop\Label\project\Food_Labelling_System\food_label_project\LabelManagement\templates" />
       <recent name="C:\Users\Admin\Desktop\Label\project\Food_Labelling_System\food_label_project\data" />
       <recent name="C:\Users\Admin\Desktop\Label\project\Food_Labelling_System\food_label_project" />
-      <recent name="C:\Users\Admin\Desktop\Label\project\Food_Labelling_System\food_label_project\scripts" />
     </key>
   </component>
   <component name="RunManager">
@@ -136,7 +142,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705244319094</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="created utils app for all the functions needed across apps&#10;created middleware.py setting default language as 'en' for admin page&#10;updated files and tested default language across pages excep for admin as 'ja'">
+      <option name="closed" value="true" />
+      <created>1705321616118</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1705321616118</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -144,7 +158,8 @@
     <MESSAGE value="initial commit" />
     <MESSAGE value="Add .gitignore to ignore a specific directory" />
     <MESSAGE value="adding project py files" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding project py files" />
+    <MESSAGE value="created utils app for all the functions needed across apps&#10;created middleware.py setting default language as 'en' for admin page&#10;updated files and tested default language across pages excep for admin as 'ja'" />
+    <option name="LAST_COMMIT_MESSAGE" value="created utils app for all the functions needed across apps&#10;created middleware.py setting default language as 'en' for admin page&#10;updated files and tested default language across pages excep for admin as 'ja'" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

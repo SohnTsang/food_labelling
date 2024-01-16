@@ -18,15 +18,29 @@ class LabelSize(models.Model):
     def __str__(self):
         return f"{self.size_name} ({self.dimensions})"
 
+
+class Nutrient(models.Model):
+    name = models.CharField(max_length=100)  # e.g., 'Calories'
+    amount = models.CharField(max_length=50)  # e.g., 10.95g
+
+    def __str__(self):
+        return f"{self.name}: {self.amount}"
+
+
 class LabelTemplate(models.Model):
     template_id = models.AutoField(primary_key=True) # A unique identifier for each template
     product_name = models.CharField(max_length=255) # The name of the product
     ingredients = models.TextField() # A text field for ingredients
-    nutrients = models.TextField() # A text field for nutrients
     other_info = models.TextField(blank=True, null=True) # Additional information if needed
     creation_date = models.DateTimeField(auto_now_add=True) # Date of creation or last update
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
     sizes = models.ManyToManyField(LabelSize)
+    content = models.CharField(max_length=255, blank=True, null=True)  # String field for content
+    expiry_date = models.CharField(max_length=100, blank=True, null=True)  # String field for expiry date
+    instruction = models.CharField(max_length=255, blank=True, null=True)  # String field for instruction
+    company_name = models.CharField(max_length=100)  # String field for company name
+    company_address = models.CharField(max_length=255)  # String field for company address
+    nutrients = models.ManyToManyField(Nutrient)
 
     def __str__(self):
         return self.product_name

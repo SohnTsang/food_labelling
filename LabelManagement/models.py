@@ -35,7 +35,7 @@ class LabelTemplate(models.Model):
     creation_date = models.DateTimeField(auto_now_add=True) # Date of creation or last update
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
     sizes = models.ManyToManyField(LabelSize)
-    content = models.CharField(max_length=255, blank=True, null=True)  # String field for content
+    content = models.CharField(max_length=50, blank=True, null=True)  # String field for content
     expiry_date = models.CharField(max_length=100, blank=True, null=True)  # String field for expiry date
     instruction = models.CharField(max_length=255, blank=True, null=True)  # String field for instruction
     company_name = models.CharField(max_length=100)  # String field for company name

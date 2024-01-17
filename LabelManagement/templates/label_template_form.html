@@ -13,14 +13,23 @@
     <h2>{% trans "Create Label Template" %}</h2>
    <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-
-        <div id="nutrientInputsContainer" class="nutrient">
+       <label for="{{ form.product_name.id_for_label }}">{% trans "Product Name" %}</label> {{ form.product_name }} <br><br>
+       <label for="{{ form.product_name.id_for_label }}">{% trans "Ingredients" %}</label> <p>{{ form.ingredients }}</p>
+       <div id="nutrientInputsContainer" class="nutrient">
                 <label for="{{ nutrient_form.name.id_for_label }}">Nutrient Name and</label>
                 <label for="{{ nutrient_form.amount.id_for_label }}">Amount</label><br>
-        </div>
+        </div> <br>
+       <button type="button" id="addNutrientButton">Add More</button> <br><br>
+       <label for="{{ form.product_name.id_for_label }}">{% trans "Content" %}</label> {{ form.content }} <br><br>
+       <label for="{{ form.product_name.id_for_label }}">{% trans "Other_info" %}</label> <p>{{ form.other_info }}</p>
+       <label for="{{ form.product_name.id_for_label }}">{% trans "Country of Origin" %}</label> {{ form.country }} <br><br>
+       <label for="{{ form.product_name.id_for_label }}">{% trans "Sizes" %}</label> <p>{{ form.sizes }}</p>
+       <label for="{{ form.product_name.id_for_label }}">{% trans "Expiry Date" %}</label> {{ form.expiry_date }} <br><br>
+       <label for="{{ form.product_name.id_for_label }}">{% trans "Instruction" %}</label> <p>{{ form.instruction }}</p>
+       <label for="{{ form.product_name.id_for_label }}">{% trans "Company Name" %}</label> {{ form.company_name }} <br>
+       <label for="{{ form.product_name.id_for_label }}">{% trans "Company Address" %}</label> {{ form.company_address }} <br>
 
-        <button type="button" id="addNutrientButton">Add More</button>
+
        <br><br>
         <button type="submit">{% trans "Convert" %}</button>
     </form>

@@ -12,11 +12,17 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from django.utils.translation import gettext_lazy as _
+
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "credentials/food-label-project-da5d775f7f76.json"
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -45,6 +51,8 @@ INSTALLED_APPS = [
     'UserManagement',
 ]
 
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -54,6 +62,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'utils.middleware.AdminLocaleMiddleware',  # need the middleware.py in the 'utils' app, utils.py
+    'utils.middleware.CreateLabelMiddleware',
+
 ]
 
 ROOT_URLCONF = 'food_label_project.urls'
@@ -112,24 +123,31 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'ja'
-
-LANGUAGES = [
-    ('en', 'English'),
-    ('ja', 'Japanese'),
-    # Add other languages here if needed
-]
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
-
+USE_L10N = True
 USE_TZ = True
+
+
+LANGUAGES = [
+    ('ja', _('Japanese')),
+    ('en', _('English')),
+]
+
+LANGUAGE_CODE = 'ja'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "food_label_project/static",
+    # You can add more directories here
+]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -139,11 +157,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Path to the Excel file
 CSV_FILE_PATH = 'data/food_label_translation_list.csv'
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-LOCALE_PATHS = [
-    os.path.join(BASE_DIR, 'locale'),
-]
-
-USE_I18N = True
-USE_L10N = True

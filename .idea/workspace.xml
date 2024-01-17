@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f242610-e9f1-4ca4-bb7e-96999c18a57a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_label_project/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/food_label_project/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/middleware.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/middleware.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/venv/.gitignore" afterDir="false" />
-    </list>
+    <list default="true" id="0f242610-e9f1-4ca4-bb7e-96999c18a57a" name="Changes" comment="updated settings.py file&#10;added workspace.xml to ignore git" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -138,8 +133,35 @@
       <option name="project" value="LOCAL" />
       <updated>1705321616118</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="updated settings.py file&#10;added workspace.xml to ignore git">
+      <option name="closed" value="true" />
+      <created>1705492257663</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1705492257663</updated>
+    </task>
+    <task id="LOCAL-00006" summary="updated settings.py file&#10;added workspace.xml to ignore git">
+      <option name="closed" value="true" />
+      <created>1705492307760</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1705492307760</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -148,7 +170,8 @@
     <MESSAGE value="adding project py files" />
     <MESSAGE value="created utils app for all the functions needed across apps&#10;created middleware.py setting default language as 'en' for admin page&#10;updated files and tested default language across pages excep for admin as 'ja'" />
     <MESSAGE value="updated nutrients under LabelTemplate model, making it inputtable for both name and amount in the form.&#10;added javascript for adding additional lines for multiple nutrient namd and amount input&#10;added javascript for session logics of saving users input in Nutrient form and resetting the form when reloading." />
-    <option name="LAST_COMMIT_MESSAGE" value="updated nutrients under LabelTemplate model, making it inputtable for both name and amount in the form.&#10;added javascript for adding additional lines for multiple nutrient namd and amount input&#10;added javascript for session logics of saving users input in Nutrient form and resetting the form when reloading." />
+    <MESSAGE value="updated settings.py file&#10;added workspace.xml to ignore git" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated settings.py file&#10;added workspace.xml to ignore git" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -11,18 +11,22 @@
     <h4>Nutrients</h4>
     <ul>
         {% for nutrient in label.nutrients %}
-        <li>{{ nutrient.name }}: {{ nutrient.amount }}</li>
+        <li>{{ nutrient.name }}: {{ nutrient.amount }} {{ nutrient.unit }}</li>
         {% endfor %}
     </ul>
-    <p>Content: {{ label.content }}</p>
+    <p>Net Weight: {{ label.net_weight }}</p>
     <p>Other_info: {{ label.other_info }}</p>
-    <p>Country: {{ label.country }}</p>
+    <p>Import Country: {{ label.import_country }}</p>
     <p>Label Sizes: {{ label.label_sizes }}</p>
-    <p>Content: {{ label.content }}</p>
+    <p>Net Weight: {{ label.net_weight }}</p>
     <p>Expiry Date: {{ label.expiry_date }}</p>
     <p>Instruction: {{ label.instruction }}</p>
     <p>Company Name: {{ label.company_name }}</p>
-    <p>Company Address: {{ label.company_address }}</p>
+    <p>Instruction: {{ label.company_address }}</p>
+    <p>Instruction: {{ label.company_email }}</p>
+    <p>Instruction: {{ label.company_phone }}</p>
+    <!--<p>Company Name: {{ label.company_name }}</p>
+    <p>Company Address: {{ label.company_address }}</p>-->
 
 </body>
 </html>

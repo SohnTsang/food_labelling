@@ -10,27 +10,35 @@
     <!-- Include your CSS files here -->
 </head>
 <body>
-    <h2>{% trans "Create Label Template" %}</h2>
-   <form method="post">
+        <h2>{% trans "Create Label Template" %}</h2>
+        <form method="post">
         {% csrf_token %}
-       <label for="{{ form.product_name.id_for_label }}">{% trans "Product Name" %}</label> {{ form.product_name }} <br><br>
-       <label for="{{ form.product_name.id_for_label }}">{% trans "Ingredients" %}</label> <p>{{ form.ingredients }}</p>
-       <div id="nutrientInputsContainer" class="nutrient">
-                <label for="{{ nutrient_form.name.id_for_label }}">Nutrient Name and</label>
-                <label for="{{ nutrient_form.amount.id_for_label }}">Amount</label><br>
+        <label for="{{ form.product_name.id_for_label }}">{% trans "Product Name" %}</label> {{ form.product_name }} <br><br>
+        <label for="{{ form.product_name.id_for_label }}">{% trans "Ingredients" %}</label> <p>{{ form.ingredients }}</p>
+        <div id="nutrientInputsContainer" class="nutrient">
+            <label for="{{ nutrient_form.name.id_for_label }}">Nutrient Name and</label>
+            <label for="{{ nutrient_form.amount.id_for_label }}">Amount</label><br>
         </div> <br>
-       <button type="button" id="addNutrientButton">Add More</button> <br><br>
-       <label for="{{ form.product_name.id_for_label }}">{% trans "Content" %}</label> {{ form.content }} <br><br>
-       <label for="{{ form.product_name.id_for_label }}">{% trans "Other_info" %}</label> <p>{{ form.other_info }}</p>
-       <label for="{{ form.product_name.id_for_label }}">{% trans "Country of Origin" %}</label> {{ form.country }} <br><br>
-       <label for="{{ form.product_name.id_for_label }}">{% trans "Sizes" %}</label> <p>{{ form.sizes }}</p>
-       <label for="{{ form.product_name.id_for_label }}">{% trans "Expiry Date" %}</label> {{ form.expiry_date }} <br><br>
-       <label for="{{ form.product_name.id_for_label }}">{% trans "Instruction" %}</label> <p>{{ form.instruction }}</p>
-       <label for="{{ form.product_name.id_for_label }}">{% trans "Company Name" %}</label> {{ form.company_name }} <br>
-       <label for="{{ form.product_name.id_for_label }}">{% trans "Company Address" %}</label> {{ form.company_address }} <br>
+        <button type="button" id="addNutrientButton">Add More</button> <br><br>
+        <!--<label for="{{ form.product_name.id_for_label }}">{% trans "Content" %}</label> {{ form.content }} <br><br>-->
+        <label for="content_amount">{% trans "Net Weight" %}</label>
+        <input type="text" id="content_amount" name="content_amount" placeholder="Enter amount">
+        <!--<label for="content_unit">{% trans "Unit" %}</label>-->
+        <select id="content_unit" name="content_unit">
+            <option value="g">g</option>
+            <option value="mg">mg</option>
+        </select><br><br>
+        <label for="{{ form.product_name.id_for_label }}">{% trans "Other_info" %}</label> <p>{{ form.other_info }}</p>
+        <label for="{{ form.product_name.id_for_label }}">{% trans "Import Country" %}</label> {{ form.import_country }} <br><br>
+        <label for="{{ form.product_name.id_for_label }}">{% trans "Sizes" %}</label> <p>{{ form.sizes }}</p>
+        <label for="{{ form.product_name.id_for_label }}">{% trans "Expiry Date" %}</label> {{ form.expiry_date }} <br><br>
+        <label for="{{ form.product_name.id_for_label }}">{% trans "Instruction" %}</label> <p>{{ form.instruction }}</p>
+        <label for="{{ form.company_name.id_for_label }}">{% trans "Company Name" %}</label> {{ form.company_name }} <br><br>
+        <label for="{{ form.company_address.id_for_label }}">{% trans "Company Address" %}</label> {{ form.company_address }} <br><br>
+        <label for="{{ form.company_email.id_for_label }}">{% trans "Company Email" %}</label> {{ form.company_email }} <br><br>
+        <label for="{{ form.company_phone.id_for_label }}">{% trans "Company Phone" %}</label> {{ form.company_phone }} <br><br>
 
-
-       <br><br>
+        <br><br>
         <button type="submit">{% trans "Convert" %}</button>
     </form>
 
@@ -42,85 +50,9 @@
         <select name="language" onchange="this.form.submit()">
             <option value="ja"{% if LANGUAGE_CODE == "ja" %} selected{% endif %}>日本語</option>
             <option value="en"{% if LANGUAGE_CODE == "en" %} selected{% endif %}>English</option>
-
             <!-- Add more language options as needed -->
         </select>
     </form>
-    <!--
-    <script>
-
-        document.addEventListener('DOMContentLoaded', function () {
-            let container = document.getElementById('nutrientInputsContainer');
-            let addButton = document.getElementById('addNutrientButton');
-
-            function addNutrientInput() {
-                let newFieldHtml = `<div>
-                                        <input type="text" name="nutrient_name[]" placeholder="Name">
-                                        <input type="text" name="nutrient_amount[]" placeholder="Amount (e.g., 100g, 200kcal)">
-                                    </div>`;
-                container.insertAdjacentHTML('beforeend', newFieldHtml);
-            }
-
-            addButton.addEventListener('click', function() {
-                addNutrientInput();
-            });
-
-            // Add the first nutrient input by default
-            addNutrientInput();
-        });
-
-    </script>
-    -->
-    <!--
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            let container = document.getElementById('nutrientInputsContainer');
-            let addButton = document.getElementById('addNutrientButton');
-
-            function saveFormState() {
-                let nutrientData = [];
-                container.querySelectorAll('div').forEach(div => {
-                    let name = div.querySelector('input[name="nutrient_name[]"]').value;
-                    let amount = div.querySelector('input[name="nutrient_amount[]"]').value;
-                    nutrientData.push({name, amount});
-                });
-                localStorage.setItem('nutrientFormData', JSON.stringify(nutrientData));
-            }
-
-            function addNutrientInput(name = '', amount = '') {
-                let newFieldHtml = `<div>
-                                        <input type="text" name="nutrient_name[]" placeholder="Name" value="${name}">
-                                        <input type="text" name="nutrient_amount[]" placeholder="Amount (e.g., 100g, 200kcal)" value="${amount}">
-                                    </div>`;
-                container.insertAdjacentHTML('beforeend', newFieldHtml);
-            }
-
-            addButton.addEventListener('click', function() {
-                addNutrientInput();
-            });
-
-            // Load saved form data if available
-            let savedData = localStorage.getItem('nutrientFormData');
-            if (savedData) {
-                let nutrientData = JSON.parse(savedData);
-                nutrientData.forEach(data => {
-                    addNutrientInput(data.name, data.amount);
-                });
-                // Clear the saved data after loading to prevent loading on page reload
-                localStorage.removeItem('nutrientFormData');
-            } else {
-                // Add the first nutrient input by default
-                addNutrientInput();
-            }
-
-            // Save the form state only when navigating away (not on reload)
-            window.onbeforeunload = function() {
-                saveFormState();
-                // returning undefined prevents the confirmation dialog on navigation
-            };
-        });
-    </script>
-    -->
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -141,6 +73,12 @@
                 let newFieldHtml = `<div>
                                         <input type="text" name="nutrient_name[]" placeholder="Name" value="${name}">
                                         <input type="text" name="nutrient_amount[]" placeholder="Amount (e.g., 100g, 200kcal)" value="${amount}">
+                                        <select id="content_unit" name="nutrient_unit[]">
+                                            <option value="g">g</option>
+                                            <option value="mg">mg</option>
+                                            <option value="mg">kcal</option>
+                                            <!-- Add more units as needed -->
+                                        </select>
                                     </div>`;
                 container.insertAdjacentHTML('beforeend', newFieldHtml);
 

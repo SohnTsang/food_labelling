@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
-class Country(models.Model):
+class ImportCountry(models.Model):
     country_id = models.AutoField(primary_key=True)  # Primary key
     name = models.CharField(max_length=100)  # e.g., 'Japan'
     code = models.CharField(max_length=2)  # e.g., 'JP' for Japan
@@ -27,27 +27,42 @@ class Nutrient(models.Model):
         return f"{self.name}: {self.amount}"
 
 
+class Company(models.Model):
+    name = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
+    email = models.EmailField()
+    phone = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name
+
 class LabelTemplate(models.Model):
     template_id = models.AutoField(primary_key=True) # A unique identifier for each template
     product_name = models.CharField(max_length=255) # The name of the product
     ingredients = models.TextField() # A text field for ingredients
     other_info = models.TextField(blank=True, null=True) # Additional information if needed
     creation_date = models.DateTimeField(auto_now_add=True) # Date of creation or last update
-    country = models.ForeignKey(Country, on_delete=models.CASCADE)
+    import_country = models.ForeignKey(ImportCountry, on_delete=models.CASCADE) #Country of Origin
     sizes = models.ManyToManyField(LabelSize)
-    content = models.CharField(max_length=50, blank=True, null=True)  # String field for content
+    net_weight = models.CharField(max_length=50, blank=True, null=True)  # String field for net_weight
     expiry_date = models.CharField(max_length=100, blank=True, null=True)  # String field for expiry date
     instruction = models.CharField(max_length=255, blank=True, null=True)  # String field for instruction
-    company_name = models.CharField(max_length=100)  # String field for company name
-    company_address = models.CharField(max_length=255)  # String field for company address
-    nutrients = models.ManyToManyField(Nutrient)
+    companies = models.ManyToManyField(Company, blank=True)
+    nutrients = models.ManyToManyField(Nutrient, blank=True, null=True)
+    #need to add the below to the model
+    #country of origin
+    #barcode
+    #manufacturer = name & address
+    #Storage
+
+
 
     def __str__(self):
         return self.product_name
 
 # Model for Regulatory Requirements
 class RegulatoryRequirement(models.Model):
-    country = models.ForeignKey(Country, on_delete=models.CASCADE, null=True)
+    import_country = models.ForeignKey(ImportCountry, on_delete=models.CASCADE, null=True)
     mandatory_info = models.TextField() # Mandatory information required on the label
     label_sizes = models.ManyToManyField(LabelSize)
     font_requirements = models.CharField(max_length=255) # Details about required fonts
@@ -56,7 +71,7 @@ class RegulatoryRequirement(models.Model):
     last_updated = models.DateTimeField(auto_now=True) # Last update of regulatory information
 
     def __str__(self):
-        return self.country.name
+        return self.import_country.name
 
 
 

@@ -36,6 +36,14 @@ class Company(models.Model):
     def __str__(self):
         return self.name
 
+
+class Manufacturer(models.Model):
+    name = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
 class LabelTemplate(models.Model):
     template_id = models.AutoField(primary_key=True) # A unique identifier for each template
     product_name = models.CharField(max_length=255) # The name of the product
@@ -51,9 +59,12 @@ class LabelTemplate(models.Model):
     nutrients = models.ManyToManyField(Nutrient, blank=True, null=True)
     #need to add the below to the model
     #country of origin
+    country_of_origin = models.CharField(max_length=50)
     #barcode
-    #manufacturer = name & address
+    barcode = models.CharField(max_length=20, blank=True, null=True)  # Adjust max_length as needed
+    manufacturer = models.ManyToManyField(Manufacturer, blank=True, null=True)
     #Storage
+    storage = models.TextField(blank=True, null=True)  # Additional information if needed
 
 
 

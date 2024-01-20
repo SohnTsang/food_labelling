@@ -1,14 +1,19 @@
+{% load i18n %}
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Translated Label</title>
+    <title>{% trans "Translated Label" %}</title>
+    <link rel="stylesheet" href="{% static 'LabelManagement/css/styles.css' %}">
+
     <!-- Include any CSS files here -->
 </head>
 <body>
     <h2>Translated Label</h2>
     <p>Product Name: {{ label.product_name }}</p>
     <p>Ingredients: {{ label.translated_ingredients }}</p>
-    <h4>Nutrients</h4>
+    <h4 class="nutrient">Nutrients</h4>
     <ul>
         {% for nutrient in label.nutrients %}
         <li>{{ nutrient.name }}: {{ nutrient.amount }} {{ nutrient.unit }}</li>
@@ -25,8 +30,10 @@
     <p>Instruction: {{ label.company_address }}</p>
     <p>Instruction: {{ label.company_email }}</p>
     <p>Instruction: {{ label.company_phone }}</p>
-    <!--<p>Company Name: {{ label.company_name }}</p>
-    <p>Company Address: {{ label.company_address }}</p>-->
+    <div>
+        <img src="{{ MEDIA_URL }}{{ label.barcode_path }}" alt="Barcode Image" width="220em" height="150em" />
+    </div>
+
 
 </body>
 </html>

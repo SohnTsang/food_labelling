@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from .forms import LabelTemplateForm
 from .models import LabelTemplate, Nutrient, Company
 from CustomTranslation.utils import translate_text  # Import your translation function
+from .utils import create_barcode_image, generate_barcode
 
 
 def create_label_template(request):
@@ -18,9 +19,15 @@ def create_label_template(request):
             amount = request.POST.get('content_amount', '')
             unit = request.POST.get('content_unit', '')
             label_template.net_weight = f'{amount} {unit}'
+
+            barcode_number = generate_barcode()
+            barcode_image_path = create_barcode_image(barcode_number)
+            label_template.barcode = barcode_number
+            label_template.barcode_image_path = barcode_image_path
             # Save the basic data
             label_template.save()
             form.save_m2m()
+
 
             company_name = form.cleaned_data.get('company_name')
             company_address = form.cleaned_data.get('company_address')
@@ -87,6 +94,8 @@ def create_label_template(request):
                     'company_address': company_address,
                     'company_email': company_email,
                     'company_phone': company_phone,
+                    'barcode': label_template.barcode,
+                    'barcode_path': label_template.barcode_image_path,
                 }
             }
 

@@ -4,10 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% trans "Translated Label" %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translated Food Label</title>
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{% static 'LabelManagement/css/styles.css' %}">
-
-    <!-- Include any CSS files here -->
 </head>
 <body>
     <h2>Translated Label</h2>
@@ -26,10 +27,13 @@
     <p>Net Weight: {{ label.net_weight }}</p>
     <p>Expiry Date: {{ label.expiry_date }}</p>
     <p>Instruction: {{ label.instruction }}</p>
+    <p>Storage: {{ label.storage }}</p>
+    <p>Manufacturer Name: {{ label.manufacturer_name }}</p>
+    <p>Manufacturer Address: {{ label.manufacturer_address }}</p>
     <p>Company Name: {{ label.company_name }}</p>
-    <p>Instruction: {{ label.company_address }}</p>
-    <p>Instruction: {{ label.company_email }}</p>
-    <p>Instruction: {{ label.company_phone }}</p>
+    <p>Company Address: {{ label.company_address }}</p>
+    <p>Company Email: {{ label.company_email }}</p>
+    <p>Company Phone: {{ label.company_phone }}</p>
     <div>
         <img src="{{ MEDIA_URL }}{{ label.barcode_path }}" alt="Barcode Image" width="220em" height="150em" />
     </div>

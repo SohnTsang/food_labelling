@@ -1,8 +1,8 @@
 
-
+import re
 from django.shortcuts import render, redirect
 from .forms import LabelTemplateForm
-from .models import LabelTemplate, Nutrient, Company
+from .models import LabelTemplate, Nutrient, Company, Manufacturer
 from CustomTranslation.utils import translate_text  # Import your translation function
 from .utils import create_barcode_image, generate_barcode
 
@@ -15,7 +15,7 @@ def create_label_template(request):
             ingredients = form.cleaned_data['ingredients']
 
             # Convert comma-separated strings to lists
-            label_template.ingredients = ingredients.split(',')
+            label_template.ingredients = re.split(',|、', ingredients)
             amount = request.POST.get('content_amount', '')
             unit = request.POST.get('content_unit', '')
             label_template.net_weight = f'{amount} {unit}'
@@ -33,6 +33,16 @@ def create_label_template(request):
             company_address = form.cleaned_data.get('company_address')
             company_email = form.cleaned_data.get('company_email')
             company_phone = form.cleaned_data.get('company_phone')
+
+            manufacturer_name = form.cleaned_data.get('manufacturer_name')
+            manufacturer_address = form.cleaned_data.get('manufacturer_address')
+
+            if manufacturer_name:  # Check if company name is provided
+                manufacturer, created = Manufacturer.objects.get_or_create(
+                    name=manufacturer_name,
+                    defaults={'address': manufacturer_address}
+                )
+                label_template.manufacturers.add(manufacturer)
 
             if company_name:  # Check if company name is provided
                 company, created = Company.objects.get_or_create(
@@ -94,6 +104,10 @@ def create_label_template(request):
                     'company_address': company_address,
                     'company_email': company_email,
                     'company_phone': company_phone,
+                    'country_of_origin': label_template.country_of_origin,
+                    'manufacturer_name': manufacturer_name,
+                    'manufacturer_address': manufacturer_address,
+                    'storage': label_template.storage,
                     'barcode': label_template.barcode,
                     'barcode_path': label_template.barcode_image_path,
                 }

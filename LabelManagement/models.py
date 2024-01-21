@@ -62,7 +62,7 @@ class LabelTemplate(models.Model):
     country_of_origin = models.CharField(max_length=50)
     #barcode
     barcode = models.CharField(max_length=20, blank=True, null=True)  # Adjust max_length as needed
-    manufacturer = models.ManyToManyField(Manufacturer, blank=True, null=True)
+    manufacturers = models.ManyToManyField(Manufacturer, blank=True, null=True)
     #Storage
     storage = models.TextField(blank=True, null=True)  # Additional information if needed
 

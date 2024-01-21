@@ -10,10 +10,14 @@ class LabelTemplateForm(forms.ModelForm):
     company_email = forms.EmailField(label=_("Company Email"), required=False)
     company_phone = forms.CharField(label=_("Company Phone"), max_length=30, required=False)
 
+    manufacturer_name = forms.CharField(label=_("Manufacturer Name"), max_length=200, required=False)
+    manufacturer_address = forms.CharField(label=_("Manufacturer Address"), max_length=200, required=False)
+
     class Meta:
         model = LabelTemplate
         fields = ['product_name', 'ingredients', 'other_info', 'import_country', 'sizes', 'net_weight',
-                  'expiry_date', 'instruction', 'company_name', 'company_address', 'company_email', 'company_phone']
+                  'expiry_date', 'instruction', 'country_of_origin', 'storage', 'company_name', 'company_address', 'company_email', 'company_phone',
+                  'manufacturer_name', 'manufacturer_address']
         labels = {
             'product_name': _('Product Name'),
             'ingredients': _('Ingredients'),
@@ -22,10 +26,14 @@ class LabelTemplateForm(forms.ModelForm):
             'net_weight': _('Net Weight'),
             'expiry_date': _('Expiry Date'),
             'instruction': _('Instruction'),
+            'country_of_origin': _('Country of Origin'),
+            'storage': _('Storage'),
             'company_name': _('Company Name'),
             'company_address': _('Company Address'),
             'company_email': _('Company Email'),
             'company_phone': _('Company Phone'),
+            'manufacturer_name': _('Manufacturer Name'),
+            'manufacturer_address:': _('Manufacturer Address'),
             # ... other labels ...
         }
 
@@ -38,13 +46,14 @@ class LabelTemplateForm(forms.ModelForm):
             'product_name': forms.TextInput(attrs={'class': 'form-control'}),
             'ingredients': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Separate items with commas'}),
             'other_info': forms.Textarea(attrs={'class': 'form-control', 'required': False}),
-            'net_weight': forms.TextInput(attrs={'class': 'form-control', 'required': False}),
             'expiry_date': forms.TextInput(attrs={'class': 'form-control', 'required': False}),
             'instruction': forms.Textarea(attrs={'class': 'form-control', 'required': False}),
+            'country_of_origin': forms.TextInput(attrs={'class': 'form-control'}),
+            'Storage': forms.Textarea(attrs={'class': 'form-control'}),
             'import_country': forms.Select(attrs={'class': 'form-control'}),
             'sizes': forms.CheckboxSelectMultiple(attrs={'class': 'sizes'}),
+            'net_weight': forms.TextInput(attrs={'class': 'form-control', 'name': 'content_amount', 'id': "content_amount"}),
         }
-
     def __init__(self, *args, **kwargs):
         super(LabelTemplateForm, self).__init__(*args, **kwargs)
         self.fields['import_country'].empty_label = None

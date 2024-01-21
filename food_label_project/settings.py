@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 from django.utils.translation import gettext_lazy as _
+from django.conf import settings
+
 
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "credentials/food-label-project-da5d775f7f76.json"
@@ -49,6 +51,7 @@ INSTALLED_APPS = [
     'Subscription',
     'TransactionLog',
     'UserManagement',
+    'bootstrap5',
 ]
 
 
@@ -81,6 +84,7 @@ TEMPLATES = [
                 'django.template.context_processors.i18n',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -141,12 +145,14 @@ LANGUAGE_CODE = 'ja'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'LabelManagement/static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / "food_label_project/static",
+    BASE_DIR / "static",
     # You can add more directories here
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'LabelManagement/static')
 
 
 # Default primary key field type
@@ -157,3 +163,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Path to the Excel file
 CSV_FILE_PATH = 'data/food_label_translation_list.csv'
 
+
+MEDIA_URL = 'food_label_project/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'food_label_project/media')

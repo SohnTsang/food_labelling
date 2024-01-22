@@ -3,3 +3,4 @@ venv/Lib
 credentials/
 *.pyc
 __pycache__/
+*.png

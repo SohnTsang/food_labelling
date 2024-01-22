@@ -19,6 +19,7 @@ def create_label_template(request):
             amount = request.POST.get('content_amount', '')
             unit = request.POST.get('content_unit', '')
             label_template.net_weight = f'{amount} {unit}'
+            print(amount, unit)
 
             barcode_number = generate_barcode()
             barcode_image_path = create_barcode_image(barcode_number)

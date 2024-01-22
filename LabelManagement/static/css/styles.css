@@ -4,13 +4,19 @@
     }
 }
 
+
+
 textarea {
     height: 9.5em;
     resize: none;
 }
 
+
+
+
 div {
-    margin-bottom: 0.3em;
+    margin-bottom: 0.6em;
+
 }
 
 label {
@@ -18,11 +24,22 @@ label {
     font-family: "Mukta", "Noto Sans JP", sans-serif;
     font-weight: 600;
     font-style: normal;
+    caret-color: transparent !important;
 }
+
+
+.form-control:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.1rem rgba(40, 167, 69, 0.25);
+
+}
+
 
 
 body {
     font-family: "Mukta", "Noto Sans JP", sans-serif;
+
+
 }
 
 #nutrientInputsContainer {
@@ -33,6 +50,33 @@ body {
     overflow-y: auto;
     margin-right: -20px;
 }
+
+.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: light-gray;
+            opacity: 0.6;
+}
+
+.form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: light-gray;
+            opacity: 0.6;
+}
+
+.form-control::-ms-input-placeholder { /* Microsoft Edge */
+            color: light-gray;
+            opacity: 0.6;
+ }
+
+ input[name='expiry_choice'] {
+    vertical-align: middle;
+    accent-color: rgba(40, 167, 69, 0.25);
+
+ }
+
+ input[name='expiry_choice']:checked {
+    vertical-align: middle;
+    accent-color: rgba(40, 167, 69, 0.25);
+ }
+
 
 .noto-sans jp-<uniquifier> {
   font-family: "Noto Sans JP", sans-serif;

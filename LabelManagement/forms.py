@@ -5,6 +5,15 @@ from django.utils.translation import gettext_lazy as _
 
 class LabelTemplateForm(forms.ModelForm):
 
+    EXPIRY_CHOICES = [
+        ('date', 'Select Date'),
+        ('printed', 'Printed on the package'),
+    ]
+
+    expiry_choice = forms.ChoiceField(choices=EXPIRY_CHOICES, widget=forms.RadioSelect)
+
+
+
     company_name = forms.CharField(label=_("Company Name"), max_length=255, required=False)
     company_address = forms.CharField(label=_("Company Address"), max_length=255, required=False)
     company_email = forms.EmailField(label=_("Company Email"), required=False)
@@ -46,14 +55,28 @@ class LabelTemplateForm(forms.ModelForm):
             'product_name': forms.TextInput(attrs={'class': 'form-control'}),
             'ingredients': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Separate items with commas'}),
             'other_info': forms.Textarea(attrs={'class': 'form-control', 'required': False}),
-            'expiry_date': forms.TextInput(attrs={'class': 'form-control', 'required': False}),
+            'expiry_date': forms.DateInput(format='%Y-%m-%d', attrs={'class': 'form-control', 'type': 'date', 'id': "expiryDateInput"}),
             'instruction': forms.Textarea(attrs={'class': 'form-control', 'required': False}),
             'country_of_origin': forms.TextInput(attrs={'class': 'form-control'}),
-            'Storage': forms.Textarea(attrs={'class': 'form-control'}),
+            'storage': forms.TextInput(attrs={'class': 'form-control textarea-sm'}),
             'import_country': forms.Select(attrs={'class': 'form-control'}),
-            'sizes': forms.CheckboxSelectMultiple(attrs={'class': 'sizes'}),
             'net_weight': forms.TextInput(attrs={'class': 'form-control', 'name': 'content_amount', 'id': "content_amount"}),
+            'sizes': forms.CheckboxSelectMultiple(attrs={'class': 'sizes'}),
+
         }
     def __init__(self, *args, **kwargs):
         super(LabelTemplateForm, self).__init__(*args, **kwargs)
         self.fields['import_country'].empty_label = None
+
+
+    def clean(self):
+        cleaned_data = super().clean()
+        expiry_choice = cleaned_data.get('expiry_choice')
+        expiry_date = cleaned_data.get('expiry_date')
+
+        if expiry_choice == 'printed':
+            cleaned_data['expiry_date'] = 'Printed on the package'
+        elif expiry_choice == 'date' and not expiry_date:
+            self.add_error('expiry_date', 'Please select a date.')
+
+        return cleaned_data

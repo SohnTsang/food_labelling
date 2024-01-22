@@ -16,23 +16,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 </head>
 <body>
     <div class="container">
+
         <div class="pt-5 mb-5"><h3 class="mukta-bold">{% trans "Create Label Template" %}</h3></div>
         <form method="post">
         {% csrf_token %}
+            <div class="form-group row">
+                <div class="col-3">
+                    <label for="{{ form.product_name.id_for_label }}">{% trans "Import Country" %}</label> {{ form.import_country }}
+                </div>
+            </div>
             <div class="form-group row justify-content-md-center">
                 <div class="col-6 col-auto">
                     <label class="" for="{{ form.product_name.id_for_label }}">{% trans "Product Name" %}</label>
                     {{ form.product_name }}
                 </div>
                 <div class="col-6 col-auto">
-                    <label for="content_amount">{% trans "Net Weight" %}</label>
+                    <label for="form.net_weight.id_for_label">{% trans "Net Weight" %}</label>
                     <div class="row">
                         <div class="col-6 col-auto" style="margin-right: -1em">
-                            {{ form.net_weight }}
+                            <input type="text" name="content_amount" class="form-control" id="content_amount" placeholder="0.02" value="{{ form.net_weight.amount }}">
                         </div>
                         <div class="col-auto">
                             <select id="content_unit" name="content_unit" class="pl-n2 form-control">
@@ -57,14 +64,38 @@
 
             </div>
             <!--<label for="{{ form.product_name.id_for_label }}">{% trans "Content" %}</label> {{ form.content }} -->
+            <div class="form-group row justify-content-md-center">
+                <div class="col-6 col-auto">
+                    <label for="{{ form.product_name.id_for_label }}">{% trans "Other_info" %}</label>
+                    {{ form.other_info }}
+                </div>
+                <div class="col-6 col-auto">
+                    <label for="{{ form.product_name.id_for_label }}">{% trans "Instruction" %}</label>
+                    {{ form.instruction }}
+                </div>
+            </div>
 
-            <label for="{{ form.product_name.id_for_label }}">{% trans "Other_info" %}</label> <p>{{ form.other_info }}</p>
-            <label for="{{ form.product_name.id_for_label }}">{% trans "Import Country" %}</label> {{ form.import_country }}
-            <label for="{{ form.product_name.id_for_label }}">{% trans "Sizes" %}</label> <p>{{ form.sizes }}</p>
-            <label for="{{ form.product_name.id_for_label }}">{% trans "Expiry Date" %}</label> {{ form.expiry_date }}
-            <label for="{{ form.product_name.id_for_label }}">{% trans "Instruction" %}</label> <p>{{ form.instruction }}</p>
+            <div class="form-group row justify-content-md-center">
+                <div class="col-6 col-auto">
+                    <label for="{{ form.storage.id_for_label }}">{% trans "Storage" %}</label>
+                    {{ form.storage }}
+                </div>
+                <div class="col-6 col-auto">
+                    <label class="me-2" for="{{ form.product_name.id_for_label }}">{% trans "Expiry Date" %}</label>
+                    <label>
+                        <input type="radio" name="expiry_choice" value="date" checked> Select Date
+                    </label>
+                    <label>
+                        <input type="radio" name="expiry_choice" value="printed"> Printed on the package
+                    </label>
+                    <div id="expiryDateField">{{ form.expiry_date }}</div>
+                </div>
+            </div>
+
+            <label for="{{ form.product_name.id_for_label }}">{% trans "Sizes" %}</label> {{ form.sizes }}
+
             <label for="{{ form.country_of_origin.id_for_label }}">{% trans "Country of Origin" %}</label> {{ form.country_of_origin }}
-            <label for="{{ form.storage.id_for_label }}">{% trans "Storage" %}</label> {{ form.storage }}
+
             <label for="{{ form.company_name.id_for_label }}">{% trans "Company Name" %}</label> {{ form.company_name }}
             <label for="{{ form.company_address.id_for_label }}">{% trans "Company Address" %}</label> {{ form.company_address }}
             <label for="{{ form.company_email.id_for_label }}">{% trans "Company Email" %}</label> {{ form.company_email }}
@@ -88,5 +119,8 @@
 
 
     <script src="{% static 'javascript/script.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 </body>
 </html>

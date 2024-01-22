@@ -4,3 +4,4 @@ credentials/
 *.pyc
 __pycache__/
 *.png
+workspace.xml

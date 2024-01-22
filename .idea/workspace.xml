@@ -4,21 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f242610-e9f1-4ca4-bb7e-96999c18a57a" name="Changes" comment="updated design and layout for create label template html (only for product name, net weight, ingredients and nutrients).&#10;updated css, javascript for the design">
-      <change afterPath="$PROJECT_DIR$/food_label_project/media/barcodes/223473780417.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LabelManagement/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/LabelManagement/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LabelManagement/static/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/LabelManagement/static/css/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LabelManagement/static/javascript/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/LabelManagement/static/javascript/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LabelManagement/templates/label_template_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/LabelManagement/templates/label_template_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LabelManagement/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/LabelManagement/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_label_project/media/barcodes/141800472285.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_label_project/media/barcodes/558269431498.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_label_project/media/barcodes/776868902342.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_label_project/media/barcodes/811387053776.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_label_project/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/food_label_project/settings.py" afterDir="false" />
-    </list>
+    <list default="true" id="0f242610-e9f1-4ca4-bb7e-96999c18a57a" name="Changes" comment="updated form design&#10;Field Expiry Date with 2 radio selection" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -195,7 +181,23 @@
       <option name="project" value="LOCAL" />
       <updated>1705850848620</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="updated gitignore to ignore *.png">
+      <option name="closed" value="true" />
+      <created>1705936399253</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1705936399253</updated>
+    </task>
+    <task id="LOCAL-00012" summary="updated form design&#10;Field Expiry Date with 2 radio selection">
+      <option name="closed" value="true" />
+      <created>1705936514565</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1705936514565</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -221,7 +223,9 @@
     <MESSAGE value="added company as a class that has company name, address, email and phone and as a many-to-many relationship to LabelTemplate&#10;updated views.py, forms.py, html to properly process and display the result" />
     <MESSAGE value="added barcode to the model and generate random number for it.&#10;added utils in LabelManagement app to handle barcode image generation and&#10;done setup for media path in setting and display the barcode in result_page.html" />
     <MESSAGE value="updated design and layout for create label template html (only for product name, net weight, ingredients and nutrients).&#10;updated css, javascript for the design" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated design and layout for create label template html (only for product name, net weight, ingredients and nutrients).&#10;updated css, javascript for the design" />
+    <MESSAGE value="updated gitignore to ignore *.png" />
+    <MESSAGE value="updated form design&#10;Field Expiry Date with 2 radio selection" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated form design&#10;Field Expiry Date with 2 radio selection" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

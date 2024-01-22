@@ -5,3 +5,4 @@ credentials/
 __pycache__/
 *.png
 workspace.xml
+food_label_project/media/barcodes

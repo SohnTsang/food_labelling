@@ -5,38 +5,99 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Translated Food Label</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% trans "Food Label Input Form" %}</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{% static 'LabelManagement/css/styles.css' %}">
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <link rel="stylesheet" href="{% static 'css/result.css' %}">
+    <script src="{% static 'javascript/result.js' %}"></script>
+
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- <script>if (!window.html2canvas) {document.write('<script src="{% static 'js/html2canvas.js' %}"><\/script>')}</script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    <!-- <script>if (!window.jspdf) {document.write('<script src="{% static 'js/jspdf.umd.min.js' %}"><\/script>')}</script> -->
+
 </head>
 <body>
-    <h2>Translated Label</h2>
-    <p>Product Name: {{ label.product_name }}</p>
-    <p>Ingredients: {{ label.translated_ingredients }}</p>
-    <h4 class="nutrient">Nutrients</h4>
-    <ul>
-        {% for nutrient in label.nutrients %}
-        <li>{{ nutrient.name }}: {{ nutrient.amount }} {{ nutrient.unit }}</li>
-        {% endfor %}
-    </ul>
-    <p>Net Weight: {{ label.net_weight }}</p>
-    <p>Other_info: {{ label.other_info }}</p>
-    <p>Import Country: {{ label.import_country }}</p>
-    <p>Label Sizes: {{ label.label_sizes }}</p>
-    <p>Net Weight: {{ label.net_weight }}</p>
-    <p>Expiry Date: {{ label.expiry_date }}</p>
-    <p>Instruction: {{ label.instruction }}</p>
-    <p>Storage: {{ label.storage }}</p>
-    <p>Manufacturer Name: {{ label.manufacturer_name }}</p>
-    <p>Manufacturer Address: {{ label.manufacturer_address }}</p>
-    <p>Company Name: {{ label.company_name }}</p>
-    <p>Company Address: {{ label.company_address }}</p>
-    <p>Company Email: {{ label.company_email }}</p>
-    <p>Company Phone: {{ label.company_phone }}</p>
-    <div>
-        <img src="{{ MEDIA_URL }}{{ label.barcode_path }}" alt="Barcode Image" width="220em" height="150em" />
+    <div class="container">
+        <div class="pt-5 mb-5"><h3 class="mukta-bold" >{{ label.product_name }} - {{ label.import_country }} Labal Format</h3></div>
+
+
+            <div class="d-flex justify-content-between row">
+
+                {% for size in selected_sizes %}
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-12">
+                        <label class="mb-3">{{ size.size_name }}</label>
+                            <div class="row label {{ size.size_name }}-label food-label">
+                                <div class="d-flex justify-content-between row flex-nowrap m-0">
+                                    <div class="col-7">
+                                        <div class="label-field">
+    <!--                                        <label class="mukta-bold">Product Name: </label>-->
+                                            <h4 contenteditable="true" class="editable-content mt-2" data-group="product-name">{{ label.product_name }}</h4>
+                                        </div>
+                                        <div class="label-field">
+                                            <h6>{% trans "INGREDIENTS" %}:</h6>
+                                            <p contenteditable="true" class="editable-content" data-group="ingredients">{{ label.translated_ingredients }}</p>
+                                        </div>
+
+                                        <p>Net Weight: {{ label.net_weight }}</p>
+                                        <p>Other_info: {{ label.other_info }}</p>
+                                        <p>Import Country: {{ label.import_country }}</p>
+                                        <p>Net Weight: {{ label.net_weight }}</p>
+                                        <p>Expiry Date: {{ label.expiry_date }}</p>
+                                        <p>Instruction: {{ label.instruction }}</p>
+                                        <p>Storage: {{ label.storage }}</p>
+                                        <p>Manufacturer Name: {{ label.manufacturer_name }}</p>
+                                        <p>Manufacturer Address: {{ label.manufacturer_address }}</p>
+                                        <p>Company Name: {{ label.company_name }}</p>
+                                        <p>Company Address: {{ label.company_address }}</p>
+                                        <p>Company Email: {{ label.company_email }}</p>
+                                        <p>Company Phone: {{ label.company_phone }}</p>
+                                        <div>
+                                            <img src="{{ MEDIA_URL }}{{ label.barcode_path }}" alt="Barcode Image" width="220em" height="150em" />
+                                        </div>
+                                    </div>
+                                    <div class="col-5 d-flex align-items-end flex-column">
+                                        <div class="nutrient nutrient-fact-table">
+                                            <h3 id="nutrient-fact">{% trans "Nutrition Facts" %}</h3>
+                                            <hr>
+                                            <ul contenteditable="true" class="editable-content" data-group="nutrients">
+                                                {% for nutrient in label.nutrients %}
+                                                <li>{{ nutrient.name }}: {{ nutrient.amount }} {{ nutrient.unit }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+
+
+
+
+        <p>Label Sizes: {{ label.label_sizes }}</p>
+        <button class="download-label" data-format="png">Download Label as PNG</button>
+        <button class="download-label" data-format="pdf">Download Label as PDF</button>
+
+
     </div>
+</div>
 
 
 </body>

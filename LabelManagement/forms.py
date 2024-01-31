@@ -4,7 +4,6 @@ from django.utils.translation import gettext_lazy as _
 
 
 class LabelTemplateForm(forms.ModelForm):
-
     EXPIRY_CHOICES = [
         ('date', 'Select Date'),
         ('printed', 'Printed on the package'),
@@ -12,20 +11,25 @@ class LabelTemplateForm(forms.ModelForm):
 
     expiry_choice = forms.ChoiceField(choices=EXPIRY_CHOICES, widget=forms.RadioSelect)
 
+    company_name = forms.CharField(label=_("Company Name"), max_length=255, required=False,
+                                   widget=forms.TextInput(attrs={'class': 'form-control'}), )
+    company_address = forms.CharField(label=_("Company Address"), max_length=255, required=False,
+                                   widget=forms.Textarea(attrs={'class': 'form-control small', 'rows': '1'}), )
+    company_email = forms.CharField(label=_("Company Email"), max_length=255, required=False,
+                                   widget=forms.TextInput(attrs={'class': 'form-control'}), )
+    company_phone = forms.CharField(label=_("Company Phone"), max_length=255, required=False,
+                                   widget=forms.TextInput(attrs={'class': 'form-control', 'type':"tel"}), )
 
-
-    company_name = forms.CharField(label=_("Company Name"), max_length=255, required=False)
-    company_address = forms.CharField(label=_("Company Address"), max_length=255, required=False)
-    company_email = forms.EmailField(label=_("Company Email"), required=False)
-    company_phone = forms.CharField(label=_("Company Phone"), max_length=30, required=False)
-
-    manufacturer_name = forms.CharField(label=_("Manufacturer Name"), max_length=200, required=False)
-    manufacturer_address = forms.CharField(label=_("Manufacturer Address"), max_length=200, required=False)
+    manufacturer_name = forms.CharField(label=_("Manufacturer Name"), max_length=255, required=False,
+                                   widget=forms.TextInput(attrs={'class': 'form-control'}), )
+    manufacturer_address = forms.CharField(label=_("Company Address"), max_length=255, required=False,
+                                   widget=forms.Textarea(attrs={'class': 'form-control small', 'rows': '1'}), )
 
     class Meta:
         model = LabelTemplate
         fields = ['product_name', 'ingredients', 'other_info', 'import_country', 'sizes', 'net_weight',
-                  'expiry_date', 'instruction', 'country_of_origin', 'storage', 'company_name', 'company_address', 'company_email', 'company_phone',
+                  'expiry_date', 'instruction', 'country_of_origin', 'storage', 'company_name', 'company_address',
+                  'company_email', 'company_phone',
                   'manufacturer_name', 'manufacturer_address']
         labels = {
             'product_name': _('Product Name'),
@@ -43,6 +47,7 @@ class LabelTemplateForm(forms.ModelForm):
             'company_phone': _('Company Phone'),
             'manufacturer_name': _('Manufacturer Name'),
             'manufacturer_address:': _('Manufacturer Address'),
+            'sizes': _('Sizes'),
             # ... other labels ...
         }
 
@@ -50,24 +55,25 @@ class LabelTemplateForm(forms.ModelForm):
             'sizes': LabelSize.objects.all()
         }
 
-
         widgets = {
             'product_name': forms.TextInput(attrs={'class': 'form-control'}),
             'ingredients': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Separate items with commas'}),
             'other_info': forms.Textarea(attrs={'class': 'form-control', 'required': False}),
-            'expiry_date': forms.DateInput(format='%Y-%m-%d', attrs={'class': 'form-control', 'type': 'date', 'id': "expiryDateInput"}),
+            'expiry_date': forms.DateInput(format='%Y-%m-%d',
+                                           attrs={'class': 'form-control', 'type': 'date', 'id': "expiryDateInput"}),
             'instruction': forms.Textarea(attrs={'class': 'form-control', 'required': False}),
             'country_of_origin': forms.TextInput(attrs={'class': 'form-control'}),
             'storage': forms.TextInput(attrs={'class': 'form-control textarea-sm'}),
             'import_country': forms.Select(attrs={'class': 'form-control'}),
-            'net_weight': forms.TextInput(attrs={'class': 'form-control', 'name': 'content_amount', 'id': "content_amount"}),
-            'sizes': forms.CheckboxSelectMultiple(attrs={'class': 'sizes'}),
+            'net_weight': forms.TextInput(
+                attrs={'class': 'form-control', 'name': 'content_amount', 'id': "content_amount"}),
+            'sizes': forms.CheckboxSelectMultiple(attrs={'class': ''}),
 
         }
+
     def __init__(self, *args, **kwargs):
         super(LabelTemplateForm, self).__init__(*args, **kwargs)
         self.fields['import_country'].empty_label = None
-
 
     def clean(self):
         cleaned_data = super().clean()

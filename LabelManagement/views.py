@@ -13,17 +13,19 @@ def create_label_template(request):
         if form.is_valid():
             label_template = form.save(commit=False)
             ingredients = form.cleaned_data['ingredients']
+            selected_sizes = form.cleaned_data['sizes']
 
             # Convert comma-separated strings to lists
             label_template.ingredients = re.split(',|、', ingredients)
             amount = request.POST.get('content_amount', '')
             unit = request.POST.get('content_unit', '')
             label_template.net_weight = f'{amount} {unit}'
-            print(amount, unit)
 
             barcode_number = generate_barcode()
             barcode_image_path = create_barcode_image(barcode_number)
             label_template.barcode = barcode_number
+
+
             label_template.barcode_image_path = barcode_image_path
             # Save the basic data
             label_template.save()
@@ -83,8 +85,7 @@ def create_label_template(request):
                     nutrients_data = ''
 
             label_sizes_names = [f'{size.size_name} ({size.dimensions})' for size in label_template.sizes.all()]
-
-
+            selected_sizes_list = [{'size_name': size.size_name, 'dimensions': size.dimensions} for size in selected_sizes]
 
             # Process and translate data
 
@@ -111,10 +112,13 @@ def create_label_template(request):
                     'storage': label_template.storage,
                     'barcode': label_template.barcode,
                     'barcode_path': label_template.barcode_image_path,
+
                 }
             }
 
             request.session['label_data'] = label_data
+            request.session['selected_sizes'] = selected_sizes_list
+            print(selected_sizes_list)
 
             # Pass translated data to the result page
             return redirect('result_page')
@@ -126,4 +130,8 @@ def create_label_template(request):
 
 def result_page(request):
     label_data = request.session.get('label_data', {})
-    return render(request, 'result_page.html', label_data)
+    selected_sizes = request.session.get('selected_sizes', [])
+    context = {**label_data, 'selected_sizes': selected_sizes}
+
+    return render(request, 'result_page.html', context)
+
